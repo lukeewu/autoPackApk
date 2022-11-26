@@ -1,5 +1,6 @@
 package com.code.packapk;
 
+import cn.hutool.core.io.FileUtil;
 import org.junit.jupiter.api.Test;
 import sun.security.tools.keytool.CertAndKeyGen;
 import sun.security.x509.X500Name;
@@ -25,11 +26,12 @@ public class PackTest {
     @Test
     public void buildApk(){
         //打包约友会
-        packYueyouhui(5);
+        packYueyouhui(2);
         //打包约视频
-        packYueshipin(5);
+        //packYueshipin(15);
         //打包看视频
-        packKanshipin(5);
+        //packKanshipin(10);
+        System.out.println("打包完成！！！！！！！！");
     }
 
     /**
@@ -103,6 +105,9 @@ public class PackTest {
             //4：给APK签名
             String signCommand = "jarsigner -verbose -keystore "+srcApkFolder+keystoreName+".keystore -signedjar "+descApkFolder+destApkName+" "+srcApkFolder+srcApkName+" key0 -storepass "+keystoreName;
             signApk(signCommand);
+            //签名完成删掉源文件
+            FileUtil.del(srcApkFolder+keystoreName);
+            FileUtil.del(srcApkFolder+srcApkName);
         }catch (Exception e){
             //只要出现异常就中断
             e.printStackTrace();
