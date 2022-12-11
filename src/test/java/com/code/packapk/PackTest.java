@@ -25,12 +25,13 @@ public class PackTest {
      */
     @Test
     public void buildApk(){
+        //System.out.println(System.currentTimeMillis());
         //打包约友会
-        packYueyouhui(2);
+        //packYueyouhui(10);
         //打包约视频
-        //packYueshipin(15);
+        //packYueshipin(10);
         //打包看视频
-        //packKanshipin(10);
+        packKanshipin(10);
         System.out.println("打包完成！！！！！！！！");
     }
 
@@ -106,8 +107,8 @@ public class PackTest {
             String signCommand = "jarsigner -verbose -keystore "+srcApkFolder+keystoreName+".keystore -signedjar "+descApkFolder+destApkName+" "+srcApkFolder+srcApkName+" key0 -storepass "+keystoreName;
             signApk(signCommand);
             //签名完成删掉源文件
-            FileUtil.del(srcApkFolder+keystoreName);
-            FileUtil.del(srcApkFolder+srcApkName);
+            FileUtil.del(srcApkFolder+keystoreName+".keystore");
+            FileUtil.del(srcApkFolder+srcApkName+".apk");
         }catch (Exception e){
             //只要出现异常就中断
             e.printStackTrace();
